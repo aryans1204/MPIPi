@@ -1,0 +1,16 @@
+IDIR =../include
+
+ODIR=obj
+LDIR =../lib
+
+LIBS=-lm
+_DEPS = mpi.h math.h stdio.h time.h
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+
+mpi_pi : 
+        mpicc -o mpi_pi mpi_pi.c $(LIBS)
+        mpirun -np 3 ./mpi_pi
+
+.PHONY : clean
+clean :
+        rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
